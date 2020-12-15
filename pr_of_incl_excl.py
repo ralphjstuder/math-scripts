@@ -1,8 +1,10 @@
+
 import math
 value = []
 objects = int(input("Enter the number of objects (or dollar amount): "))
 recipients = int(input("Enter the number of recipients(menu items or bins): "))
 limit = int(input("Enter the maximum number of objects per recipients: "))
+
 def nCr(n, k):
     f = math.factorial
     return f(abs(n)) // f(abs(k)) // f(abs(n - k))
