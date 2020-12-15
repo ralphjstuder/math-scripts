@@ -1,4 +1,3 @@
-
 import math
 value = []
 objects = int(input("Enter the number of objects (or dollar amount): "))
