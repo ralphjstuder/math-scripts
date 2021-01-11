@@ -2,7 +2,7 @@ import math
 value = []
 objects = int(input("Enter the number of objects (or dollar amount): "))
 recipients = int(input("Enter the number of recipients(menu items or bins): "))
-limit = int(input("Enter the maximum number of objects per recipients: "))
+limit = int(input("Enter the maximum number of objects per recipient: "))
 
 def nCr(n, k):
     f = math.factorial
