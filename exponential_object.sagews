@@ -19,7 +19,7 @@ def aut_group(graph):
             aut_count += 1
     return aut_count
 
-# Build exponential object, If show set to true function prints graph objects other wise returns data frame
+# Build exponential object, if show set to true, function prints graph objects, otherwise returns list of data
 def exponential_object(G, H, show=False):
     set_map = FiniteSetMaps(G.vertices(), H.vertices())
     exp_G_to_H = Graph(loops=True)
@@ -45,11 +45,11 @@ def exponential_object(G, H, show=False):
         return [len(hom_graphs.connected_components_subgraphs()), len(hom_graphs.edges()),
                 len(hom_graphs.vertices()), iso_classes(hom_graphs), aut_group(hom_graphs)]
 
-# Allow for iterating through graphs
+# function for iterating through graphs
 def graph_iter(graph, n):
     return graph(n)
 
-# Iterates each graph through a given number of vertices checks all unique combinations, returns data frame
+# Iterates each graph through a given number of vertices, checks all unique combinations, returns data frame
 def generate_graph_data(n):
     graphs_dict = {'CycleG': graphs.CycleGraph, 'StG': graphs.StarGraph, 'CompG': graphs.CompleteGraph}
     g_data = {}
