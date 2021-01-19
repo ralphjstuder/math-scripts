@@ -1,7 +1,7 @@
 import math
 value = []
 objects = int(input("Enter the number of objects for distribution: "))
-recipients = int(input("Enter the number of nodes: "))
+nodes = int(input("Enter the number of nodes: "))
 limit = int(input("Enter the maximum number of objects per node: "))
 
 def nCr(n, k):
