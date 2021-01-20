@@ -2,14 +2,25 @@ import pandas as pd
 
 # Count isomorphisms between components
 def iso_classes(graph):
-    iso_classes=[]
-    for comp_1 in graph.connected_components_subgraphs():
-        for comp_2 in graph.connected_components_subgraphs():
-            if (comp_1, comp_2) and (comp_2, comp_1) not in iso_classes:
-                if comp_1.is_isomorphic(comp_2):
-                    iso_classes.append((comp_1, comp_2))
+    components = {}
+    set_list = []
+    iso_classes_dict = {}
+    count = 1
+    for comp in graph.connected_components_subgraphs():
+        components[count] = comp
+        iso_classes_dict[count] = set()
+        count += 1
 
-    return len(iso_classes)
+    for num, graph in components.items():
+        for num2, graph2 in components.items():
+            if graph.is_isomorphic(graph2):
+                iso_classes_dict[num].add(num2)
+
+    for val in iso_classes_dict.values():
+        if val not in set_list:
+            set_list.append(val)
+
+    return len(set_list)
 
 # Count which components have automorphisms
 def aut_group(graph):
@@ -42,8 +53,11 @@ def exponential_object(G, H, show=False):
     if show:
         hom_graphs.show(figsize=[100,4],dpi=100)
     else:
-        return [len(hom_graphs.connected_components_subgraphs()), len(hom_graphs.edges()),
-                len(hom_graphs.vertices()), iso_classes(hom_graphs), aut_group(hom_graphs)]
+        return hom_graphs
+   
+def get_data(graph):
+    return [len(graph.connected_components_subgraphs()), len(graph.edges()),
+            len(graph.vertices()), iso_classes(graph)]
 
 # function for iterating through graphs
 def graph_iter(graph, n):
@@ -51,7 +65,7 @@ def graph_iter(graph, n):
 
 # Iterates each graph through a given number of vertices, checks all unique combinations, returns data frame
 def generate_graph_data(n):
-    graphs_dict = {'CycleG': graphs.CycleGraph, 'StG': graphs.StarGraph, 'CompG': graphs.CompleteGraph}
+    graphs_dict = {'CycleG': graphs.CycleGraph, 'PathG': graphs.PathGraph, 'CompG': graphs.CompleteGraph}
     g_data = {}
 
     for name1, graph1 in graphs_dict.items():
