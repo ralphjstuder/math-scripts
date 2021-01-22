@@ -4,7 +4,6 @@ class Node():
 
 which will be analyzed throughout various graph transformations.
 """
-    
 
     def __init__(self, orig_pos, graph):
         self.orig_pos = orig_pos
@@ -29,12 +28,13 @@ which will be analyzed throughout various graph transformations.
         return self
         
         
-        
 class Spider():
+    
 """The spider class coordinates the current states of nodes with eachother,
    
 controlling the state and outtput of data for spider web formation.
 """
+
     def __init__(self, node_list):
         self.node_list = node_list
         self.mapped_graph = Graph(loops=True)
