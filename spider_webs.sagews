@@ -40,8 +40,20 @@ controlling the state and outtput of data for spider web formation.
         self.mapped_graph = Graph(loops=True)
         self.current_graph = [node.current_pos for node in node_list]
         self.graph_dict = {}
+        self.node_counter = 0
+        self.mapped_graph.add_vertex()
+        self.mapped_graph_pos = 0
         
     def update_current_graph(self):
         for node in self.node_list:
             self.curr_graph.append(node.current_pos)
+        self.graph_dict[self.node_counter] = self.current_state
+        self.node_counter += 1
+        return self
+    
+    def udpate_mapped_graph(self):
+        for node in self.node_list:
+            for pos in node.avail_moves:
+                self.mapped_graph.add_edge(self.mapped_graph_pos)
+        self.mapped_graph_pos += 1
         return self
