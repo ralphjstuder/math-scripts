@@ -10,4 +10,4 @@ A Graph Theory exploration, made for establishing a large dataset on exponential
 
 ### Spider Webs
 
-A Graph Theory exploration of network transformations, following fundamentally logical moves called a "spiders path". If a "spider path" is available, an edge is created within the "spider web" object. Thus, each node in the "spider web" represents a transformed, homomorphic state of all nodes within the original graph. A seperate object within the "spider web" represents a different "spider path" through spiderable homomorphisms.
+A Graph Theory exploration of network transformations, following fundamentally logical moves called "spiders paths". If a "spider path" is available, an edge is created within the "spider web" object. Thus, each node in the "spider web" represents a transformed, homomorphic state of all nodes within the original graph. 
