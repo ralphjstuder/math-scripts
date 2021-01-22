@@ -6,7 +6,7 @@ A combinatorial concept, is used for different counting and probabilities proble
 
 ### Exponential Object 
 
-A Graph Theory exploration, made for establishing a large dataset on exponential graphs, combining common graph types. Through this, one can explore properties of the resulting subgraphs, allowing for a deeper understanding of nodes, connections and symmetries present within exponentially large graphical sturctures. The data collected contains number of homomorphisms and of connected components along with the number and populations of isomorphic classes within the components.
+A Graph Theory exploration, made for establishing a large dataset on exponential graphs, combining common graph types. Through this, one can explore properties of the resulting subgraphs, allowing for a deeper understanding of nodes, connections and symmetries present within exponentially large graphical sturctures. The data collected contains number of homomorphisms and connected components along with the number and populations of isomorphic classes within the components.
 
 ### Spider Webs
 
