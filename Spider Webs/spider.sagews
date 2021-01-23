@@ -54,6 +54,13 @@ class Spider():
             if len(node.avail_moves) > 0:
                 node.update_position()
                 self.update_current_state()
+                if self.current_state in self.graph_dict.values():
+                    node.current_pos = node.previous_position
+                    continue
+                else:
+                    node.update_position()
+                    self.update_current_state()
+                    break
         return self
 
     def reset_graph(self):
