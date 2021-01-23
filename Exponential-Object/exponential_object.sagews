@@ -78,5 +78,16 @@ def generate_graph_data(n):
     graph_df.stack().reset_index()
     graph_df.rename(columns={0: 'objects', 1: 'edges', 2: 'homomorphisms', 3: 'isomorphism classes', 4: "components w aut"}, inplace=True)
     return graph_df
-    
-generate_graph_data(9)
+
+# Isolate spider moves within exponential graph
+def spider_web(graph1, graph2):
+    exp = exponential_object(graph1, graph2)
+    for f in exp:
+        for g in exp:
+            count = 0
+            for num in range(len(f)):
+                if f[num] != g[num]:
+                    count += 1
+            if count > 1:
+                exp.delete_edges([(f,g)])
+    exp.show(figsize=[100,4],dpi=100)
