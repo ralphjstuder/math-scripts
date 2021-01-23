@@ -30,7 +30,7 @@ def aut_group(graph):
             aut_count += 1
     return aut_count
 
-# Build exponential object, if show set to true, function prints graph objects, otherwise returns list of data
+# Build exponential object, if show set to true, function prints graph objects, otherwise returns data from subgraph of homomorphisms
 def exponential_object(G, H, show=False):
     set_map = FiniteSetMaps(G.vertices(), H.vertices())
     exp_G_to_H = Graph(loops=True)
@@ -72,7 +72,7 @@ def generate_graph_data(n):
         for name2, graph2 in graphs_dict.items():
             for i in range(2,n):
                 for j in range(2,n):
-                    g_data['{}({})^{}({})'.format(name1, i, name2, j)] = exponential_object(graph_iter(graph1, i), graph_iter(graph2, j))
+                    g_data['{}({})^{}({})'.format(name1, i, name2, j)] = get_data(exponential_object(graph_iter(graph1, i), graph_iter(graph2, j)))
 
     graph_df = pd.DataFrame.from_dict(g_data, orient='index')
     graph_df.stack().reset_index()
