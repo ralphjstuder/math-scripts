@@ -11,6 +11,8 @@ which will be analyzed throughout various graph transformations.
         self.neighbors = graph.neighbors(orig_pos)
         self.avail_moves = []
         self.graph = graph
+        self.previous_position = 0
+        self.update_avail()
 
     def update_avail(self):
     """Update avialable sider moves depending on the current state of the graph."""
@@ -23,7 +25,7 @@ which will be analyzed throughout various graph transformations.
 
     def update_position(self):
     """Update node's current position."""
-    
+        self.previous_position = self.current_pos
         self.current_pos = self.avail_moves.pop()
         return self
         
