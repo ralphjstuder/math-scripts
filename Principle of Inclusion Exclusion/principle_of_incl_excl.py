@@ -20,7 +20,7 @@ def inclusion_exclusion(x):
             minus.append(value[count + 1])
         except IndexError:
             pass
-        i += 2
+        count += 2
     print(x-(sum(plus) - sum(minus)))
 
 def principle_of_inclusion_exclusion(obj, node, lim):
