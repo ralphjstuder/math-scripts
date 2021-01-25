@@ -11,16 +11,16 @@ which will be analyzed throughout various graph transformations.
         self.neighbors = graph.neighbors(orig_pos)
         self.avail_moves = []
         self.graph = graph
-        self.previous_position = 0
+        self.previous_position = None
         self.update_avail()
 
     def update_avail(self):
     """Update avialable sider moves depending on the current state of the graph."""
         self.avail_moves = []
-        for neighbor in self.neighbors:
-            for vertex in self.graph.vertices():
-                if neighbor in self.graph.neighbors(vertex) and vertex != self.current_pos:
-                    self.avail_moves.append(vertex)
+        for neighbor in self.graph.neighbors(self.current_pos):
+            for neighb2 in self.graph.neighbors(neighbor):
+                if neighb2 != self.current_pos:
+                    self.avail_moves.append(neighb2)
         return self
 
     def update_position(self):
