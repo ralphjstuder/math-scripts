@@ -91,3 +91,67 @@ def spider_web(graph1, graph2):
             if count > 1:
                 exp.delete_edges([(f,g)])
     exp.show(figsize=[100,4],dpi=100)
+    
+ # Find the factor group: automorphism group/automorphisms spiderable to the identity
+def factor_group(graph1):
+    null_g = []
+    aut_g = graph1.automorphism_group()
+
+    for comp in spider_web(graph1, graph1).connected_components_subgraphs():
+        vert_list = []
+        for mapping in comp.vertices():
+            vert_list.append(mapping[:])
+
+        if graph1.vertices() in vert_list:
+            count = 1
+            for aut in aut_g:
+                aut_dict = aut.dict()
+                aut_vals = [x for x in aut_dict.values()]
+                if aut_vals in vert_list and aut_vals != graph1.vertices():
+                    count += 1
+                    null_g.append(str(aut))
+
+            for num in range(2, len(null_g)):
+                if null_g[1] or null_g[2] in null_g[num]:
+                    null_g.remove(null_g[num])
+
+            if count == len(aut_g):
+                null_g = aut_g
+            elif count <= 1:
+                return aut_g
+            else:
+                null_g = PermutationGroup(null_g)
+
+    if len(null_g) < 1:
+        return aut_g
+    else:
+        return aut_g.quotient(null_g)
+
+# Find the graph's stiff form
+def pleat(graph):
+    for vert in graph.vertices():
+        orig_neighbors = graph.neighbors(vert)
+        for neighbor in orig_neighbors:
+            moves = [x for x in graph.neighbors(neighbor) if x != vert and set(orig_neighbors).issubset(graph.neighbors(x))]
+            if len(moves) > 0:
+                try:
+                    graph.delete_vertex(vert)
+                except:
+                    ValueError
+                    pass
+
+    count = 0
+    for vert in graph.vertices():
+        moves = []
+        for neighb in graph.neighbors(vert):
+            for neighb2 in graph.vertices(neighb):
+                if neighb2 != vert and set(graph.neighbors(vert)).issubset(graph.neighbors(neighb2)):
+                    moves.append(neighb2)
+        if len(moves) == 0:
+            count += 1
+
+    if count != len(graph.vertices()):
+        return pleat(graph)
+    else:
+        return graph
+
