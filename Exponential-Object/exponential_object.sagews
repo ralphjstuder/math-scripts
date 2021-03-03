@@ -154,4 +154,39 @@ def pleat(graph):
         return pleat(graph)
     else:
         return graph
+    
+    # Find injective homomorphism from graph to stiff form
+    def injective_hom(graph):
+    inj_hom = {}
+    for vert in graph.vertices():
+        inj_hom[vert] = vert
+
+    for vert in graph.vertices():
+        orig_neighbors = graph.neighbors(vert)
+        avail_moves = []
+        for neighbor in orig_neighbors:
+            moves = [x for x in graph.neighbors(neighbor) if x != vert and x != neighbor]
+            avail_moves.extend(moves)
+        if len(avail_moves) > 0:
+            spider = moves.pop()
+            inj_hom[vert] = spider
+            graph.delete_vertex(vert)
+            for key, val in inj_hom.items():
+                if key != vert and val == vert:
+                    inj_hom[key] = spider
+
+    no_moves_count = 0
+    for vert in graph.vertices():
+        moves = []
+        for neighb in graph.neighbors(vert):
+            for neighb2 in graph.vertices(neighb):
+                if neighb2 != vert and neighb2 != neighb:
+                    moves.append(neighb2)
+        if len(moves) == 0:
+            no_moves_count += 1
+
+    if no_moves_count != len(graph.vertices()):
+        return injective_hom(graph)
+    else:
+        return inj_hom
 
